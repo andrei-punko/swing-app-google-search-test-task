@@ -1,5 +1,6 @@
 
 ## Desktop application with ability to make search using Google
+![Java CI with Maven](https://github.com/andrei-punko/swing-app-search-test-task/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 1. Try to develop desktop application which consists of form with:  
     - Input field (JTextField)
