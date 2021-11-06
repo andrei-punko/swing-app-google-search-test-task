@@ -1,5 +1,6 @@
 package by.andd3dfx.search;
 
+import by.andd3dfx.search.dto.SearchResultItem;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;

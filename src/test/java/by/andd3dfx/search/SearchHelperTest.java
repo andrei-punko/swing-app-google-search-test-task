@@ -3,6 +3,7 @@ package by.andd3dfx.search;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import by.andd3dfx.search.dto.SearchResultItem;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package by.andd3dfx.ui;
 
 import by.andd3dfx.search.PostSearchActionRunner;
-import by.andd3dfx.search.SearchResultItem;
+import by.andd3dfx.search.dto.SearchResultItem;
 import by.andd3dfx.search.SearchTask;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
