@@ -22,7 +22,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>by.andd3dfx.Main</mainClass>
+              <mainClass>by.andd3dfx.MainApp</mainClass>
             </manifest>
           </archive>
         </configuration>

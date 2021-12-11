@@ -1,4 +1,4 @@
-package by.andd3dfx.search.dto;
+package by.andd3dfx.util.model;
 
 public class SearchResultItem {
 
@@ -16,10 +16,5 @@ public class SearchResultItem {
 
     public String getTitle() {
         return title;
-    }
-
-    @Override
-    public String toString() {
-        return "Result[url:" + url + ",title:" + title + "]";
     }
 }
