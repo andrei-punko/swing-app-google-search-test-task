@@ -60,6 +60,7 @@
           <excludes>
             <exclude>**/configs/**</exclude>
             <exclude>**/dto/**</exclude>
+            <exclude>**/model/**</exclude>
             <exclude>**/entities/**</exclude>
           </excludes>
         </configuration>
