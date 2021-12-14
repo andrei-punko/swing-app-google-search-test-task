@@ -1,6 +1,6 @@
-package by.andd3dfx;
+package by.andd3dfx.searchapp;
 
-import by.andd3dfx.ui.MainFrame;
+import by.andd3dfx.searchapp.ui.MainFrame;
 
 public class MainApp {
 

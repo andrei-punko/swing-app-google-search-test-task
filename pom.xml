@@ -5,7 +5,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>swing-app-search-test-task</artifactId>
+  <artifactId>swing-app-google-search-test-task</artifactId>
   <groupId>by.andd3dfx</groupId>
   <version>1.0-SNAPSHOT</version>
 
@@ -22,7 +22,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>by.andd3dfx.MainApp</mainClass>
+              <mainClass>by.andd3dfx.searchapp.MainApp</mainClass>
             </manifest>
           </archive>
         </configuration>

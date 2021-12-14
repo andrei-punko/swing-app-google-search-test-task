@@ -1,4 +1,4 @@
-package by.andd3dfx.util.model;
+package by.andd3dfx.searchapp.search.model;
 
 public class SearchResultItem {
 

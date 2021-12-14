@@ -1,7 +1,7 @@
-package by.andd3dfx.ui;
+package by.andd3dfx.searchapp.ui;
 
-import by.andd3dfx.util.model.SearchResult;
-import by.andd3dfx.util.model.SearchResultItem;
+import by.andd3dfx.searchapp.search.model.SearchResult;
+import by.andd3dfx.searchapp.search.model.SearchResultItem;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,9 +17,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class MainFrame extends JFrame {
 
-    private static final String WINDOW_TITLE = "Google search test task";
+    private static final String WINDOW_TITLE = "Google search application (test task)";
     private static final String SEARCH_BUTTON_LABEL = "Search";
     private static final int SEARCH_FIELD_COLUMNS_COUNT = 50;
+    private static final int RESULTS_PER_PAGE = 10;
 
     public MainFrame() {
         super(WINDOW_TITLE);
@@ -31,7 +32,8 @@ public class MainFrame extends JFrame {
 
         SearchEventListener searchEventListener = new SearchEventListener(
                 () -> searchStringTextField.getText(),
-                (SearchResult searchResult) -> updateTable(searchResult, searchResultTable)
+                (SearchResult searchResult) -> updateTable(searchResult, searchResultTable),
+                RESULTS_PER_PAGE
         );
         searchStringTextField.addActionListener(searchEventListener);
         searchButton.addActionListener(searchEventListener);

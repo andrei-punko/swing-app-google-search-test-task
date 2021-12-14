@@ -1,7 +1,7 @@
-package by.andd3dfx.util;
+package by.andd3dfx.searchapp.search;
 
-import by.andd3dfx.util.model.SearchResult;
-import by.andd3dfx.util.model.SearchResultItem;
+import by.andd3dfx.searchapp.search.model.SearchResult;
+import by.andd3dfx.searchapp.search.model.SearchResultItem;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +13,18 @@ import org.slf4j.LoggerFactory;
 
 public class SearchHelper {
 
-    private static final String SEARCH_URL = "https://www.google.com/search?q=%s&start=%d";
-    private static final String CHARSET = "UTF-8";
-    private static final String USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
+    private final String SEARCH_URL = "https://www.google.com/search?q=%s&start=%d";
+    private final String CHARSET = "UTF-8";
+    private final String USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchHelper.class);
-
-    private SearchHelper() {
-    }
 
     /**
      * For search implementation next link was useful:
      * <p>
      * http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api
      */
-    public static SearchResult search(String searchString, int maxResults) {
+    public SearchResult search(String searchString, int maxResults) {
         List<SearchResultItem> resultItems = new ArrayList<>();
         try {
             int offset = 0;
@@ -50,7 +47,7 @@ public class SearchHelper {
         return new SearchResult(resultItems);
     }
 
-    static List<SearchResultItem> batchSearch(Elements elements) throws Exception {
+    private List<SearchResultItem> batchSearch(Elements elements) throws Exception {
         List<SearchResultItem> result = new ArrayList<>();
         for (Element link : elements) {
             SearchResultItem searchResultItem = extractSearchResultItemFromLink(link);
@@ -61,7 +58,7 @@ public class SearchHelper {
         return result;
     }
 
-    static Elements searchLinks(String searchString, int offset) throws Exception {
+    private Elements searchLinks(String searchString, int offset) throws Exception {
         String keyword = URLEncoder.encode(searchString, CHARSET);
         String url = String.format(SEARCH_URL, keyword, offset);
         return Jsoup
@@ -70,7 +67,7 @@ public class SearchHelper {
                 .get().select(".g a");
     }
 
-    static SearchResultItem extractSearchResultItemFromLink(Element link) throws Exception {
+    private SearchResultItem extractSearchResultItemFromLink(Element link) throws Exception {
         String title = link.text();
 
         String absoluteUrl = link.absUrl("href");
