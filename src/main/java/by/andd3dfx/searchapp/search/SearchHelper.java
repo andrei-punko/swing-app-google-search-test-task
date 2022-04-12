@@ -15,7 +15,7 @@ public class SearchHelper {
 
     private final String SEARCH_URL = "https://www.google.com/search?q=%s&start=%d";
     private final String CHARSET = "UTF-8";
-    private final String USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
+    private final String USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchHelper.class);
 
