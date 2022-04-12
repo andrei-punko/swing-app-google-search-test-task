@@ -1,5 +1,5 @@
 
-# Test task: Desktop application with ability to make search using Google
+# Swing-based desktop app to make Google search (Test task)
 ![Java CI with Maven](https://github.com/andrei-punko/swing-app-google-search/workflows/Java%20CI%20with%20Maven/badge.svg)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/swing-app-google-search/actions/workflows/maven.yml)
 [![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/swing-app-google-search/actions/workflows/maven.yml)
