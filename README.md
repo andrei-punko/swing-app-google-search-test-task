@@ -4,6 +4,8 @@
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/swing-app-google-search/actions/workflows/maven.yml)
 [![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/swing-app-google-search/actions/workflows/maven.yml)
 
+## Task definition
+
 1. Try to develop desktop application which consists of form with:  
     - Input field (JTextField)
     - `Search` button (JButton)
@@ -22,3 +24,7 @@
 Hint: to get page from Google you could use 
 [this](https://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api) 
 code from Stackoverflow
+
+## Prerequisites:
+- JDK 11
+- Maven 3
