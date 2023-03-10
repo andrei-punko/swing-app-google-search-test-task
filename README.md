@@ -26,5 +26,5 @@ Hint: to get page from Google you could use
 code from Stackoverflow
 
 ## Prerequisites:
-- JDK 11
 - Maven 3
+- JDK 17
