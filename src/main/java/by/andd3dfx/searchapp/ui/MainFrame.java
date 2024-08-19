@@ -1,5 +1,6 @@
 package by.andd3dfx.searchapp.ui;
 
+import by.andd3dfx.searchapp.search.SearchHelper;
 import by.andd3dfx.searchapp.search.model.SearchResult;
 import by.andd3dfx.searchapp.search.model.SearchResultItem;
 import java.awt.BorderLayout;
@@ -22,7 +23,7 @@ public class MainFrame extends JFrame {
     private static final int SEARCH_FIELD_COLUMNS_COUNT = 50;
     private static final int RESULTS_PER_PAGE = 10;
 
-    public MainFrame() {
+    public MainFrame(SearchHelper searchHelper) {
         super(WINDOW_TITLE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -30,13 +31,14 @@ public class MainFrame extends JFrame {
         JTextField searchStringTextField = new JTextField(SEARCH_FIELD_COLUMNS_COUNT);
         JButton searchButton = new JButton(SEARCH_BUTTON_LABEL);
 
-        SearchEventListener searchEventListener = new SearchEventListener(
-                () -> searchStringTextField.getText(),
-                (SearchResult searchResult) -> updateTable(searchResult, searchResultTable),
-                RESULTS_PER_PAGE
-        );
-        searchStringTextField.addActionListener(searchEventListener);
-        searchButton.addActionListener(searchEventListener);
+        var eventListener = new SearchEventListener(() -> {
+            var searchString = searchStringTextField.getText();
+            var searchResult = searchHelper.search(searchString, RESULTS_PER_PAGE);
+            updateTable(searchResult, searchResultTable);
+        });
+
+        searchStringTextField.addActionListener(eventListener);
+        searchButton.addActionListener(eventListener);
 
         JPanel upperPanel = new JPanel();
         upperPanel.add(searchStringTextField);
@@ -54,7 +56,7 @@ public class MainFrame extends JFrame {
         setResizable(false);
     }
 
-    private Void updateTable(SearchResult searchResult, JTable searchResultTable) {
+    private void updateTable(SearchResult searchResult, JTable searchResultTable) {
         DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
         tableModel.setRowCount(0);
 
@@ -68,6 +70,5 @@ public class MainFrame extends JFrame {
         Vector<String> columnNames = new Vector<>();
         columnNames.add("Search results");
         tableModel.setDataVector(new Vector<>(rows), columnNames);
-        return null;
     }
 }

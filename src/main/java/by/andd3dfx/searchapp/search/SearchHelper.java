@@ -4,6 +4,7 @@ import by.andd3dfx.searchapp.search.model.SearchResult;
 import by.andd3dfx.searchapp.search.model.SearchResultItem;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -22,32 +23,31 @@ public class SearchHelper {
     /**
      * For search implementation next link was useful:
      * <p>
-     * http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api
+     * <a href="http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api">Call Google API programmatically</a>
      */
     public SearchResult search(String searchString, int maxResults) {
-        List<SearchResultItem> resultItems = new ArrayList<>();
         try {
+            var resultItems = new LinkedHashSet<SearchResultItem>();
             int offset = 0;
             while (resultItems.size() < maxResults) {
                 Elements elements = searchLinks(searchString, offset);
                 if (elements.isEmpty()) {
                     break;
                 }
-                List<SearchResultItem> searchResultItems = batchSearch(elements);
-                resultItems.addAll(searchResultItems);
-                offset += 10;
+                resultItems.addAll(batchSearch(elements));
+                offset += maxResults;
             }
-            while (resultItems.size() > maxResults) {
-                resultItems.remove(resultItems.size() - 1);
-            }
+
+            return new SearchResult(resultItems.stream()
+                    .limit(maxResults)
+                    .toList());
         } catch (Exception e) {
             LOGGER.error("Error during search occurs", e);
+            return new SearchResult(List.of());
         }
-
-        return new SearchResult(resultItems);
     }
 
-    private List<SearchResultItem> batchSearch(Elements elements) throws Exception {
+    private List<SearchResultItem> batchSearch(Elements elements) {
         List<SearchResultItem> result = new ArrayList<>();
         for (Element link : elements) {
             SearchResultItem searchResultItem = extractSearchResultItemFromLink(link);
@@ -67,7 +67,7 @@ public class SearchHelper {
                 .get().select(".g a");
     }
 
-    private SearchResultItem extractSearchResultItemFromLink(Element link) throws Exception {
+    private SearchResultItem extractSearchResultItemFromLink(Element link) {
         String title = link.text();
 
         String absoluteUrl = link.absUrl("href");

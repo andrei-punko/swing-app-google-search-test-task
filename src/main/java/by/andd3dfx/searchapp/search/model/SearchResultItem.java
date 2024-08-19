@@ -1,5 +1,7 @@
 package by.andd3dfx.searchapp.search.model;
 
+import java.util.Objects;
+
 public class SearchResultItem {
 
     private final String url;
@@ -16,5 +18,18 @@ public class SearchResultItem {
 
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SearchResultItem that = (SearchResultItem) o;
+        return Objects.equals(url, that.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(url);
     }
 }
