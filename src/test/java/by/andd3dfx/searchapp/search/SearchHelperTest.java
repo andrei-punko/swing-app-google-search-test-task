@@ -1,11 +1,10 @@
 package by.andd3dfx.searchapp.search;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import by.andd3dfx.searchapp.search.model.SearchResult;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SearchHelperTest {
 
@@ -18,8 +17,8 @@ public class SearchHelperTest {
 
     @Test
     public void search() {
-        SearchResult result = searchHelper.search("Andrei", 10);
+        var result = searchHelper.search("Andrei", 10);
 
-        assertThat(result.getSearchResultItems().size(), is(10));
+        assertThat(result.size(), is(10));
     }
 }

@@ -1,7 +1,6 @@
 package by.andd3dfx.searchapp.ui;
 
 import by.andd3dfx.searchapp.search.SearchHelper;
-import by.andd3dfx.searchapp.search.model.SearchResult;
 import by.andd3dfx.searchapp.search.model.SearchResultItem;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -15,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class MainFrame extends JFrame {
 
@@ -65,12 +65,12 @@ public class MainFrame extends JFrame {
         });
     }
 
-    private void updateTable(SearchResult searchResult, JTable searchResultTable) {
+    private void updateTable(List<SearchResultItem> searchResult, JTable searchResultTable) {
         DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
         tableModel.setRowCount(0);
 
         Vector<Vector> rows = new Vector<>();
-        for (var searchResultItem : searchResult.getSearchResultItems()) {
+        for (var searchResultItem : searchResult) {
             Vector<String> row = new Vector<>();
             row.add(searchResultItem.getUrl());
             rows.add(row);

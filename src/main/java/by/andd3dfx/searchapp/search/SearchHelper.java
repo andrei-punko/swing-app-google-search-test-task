@@ -1,16 +1,16 @@
 package by.andd3dfx.searchapp.search;
 
-import by.andd3dfx.searchapp.search.model.SearchResult;
 import by.andd3dfx.searchapp.search.model.SearchResultItem;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 public class SearchHelper {
 
@@ -25,7 +25,7 @@ public class SearchHelper {
      * <p>
      * <a href="http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api">Call Google API programmatically</a>
      */
-    public SearchResult search(String searchString, int maxResults) {
+    public List<SearchResultItem> search(String searchString, int maxResults) {
         try {
             var resultItems = new LinkedHashSet<SearchResultItem>();
             int offset = 0;
@@ -38,12 +38,12 @@ public class SearchHelper {
                 offset += maxResults;
             }
 
-            return new SearchResult(resultItems.stream()
+            return resultItems.stream()
                     .limit(maxResults)
-                    .toList());
+                    .toList();
         } catch (Exception e) {
             LOGGER.error("Error during search occurs", e);
-            return new SearchResult(List.of());
+            return List.of();
         }
     }
 
