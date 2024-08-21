@@ -28,21 +28,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JTable searchResultTable = new JTable(new DefaultTableModel());
-        JTextField searchStringTextField = new JTextField(SEARCH_FIELD_COLUMNS_COUNT);
-        JButton searchButton = new JButton(SEARCH_BUTTON_LABEL);
-
-        var eventListener = new SearchEventListener(() -> {
-            var searchString = searchStringTextField.getText();
-            var searchResult = searchHelper.search(searchString, RESULTS_PER_PAGE);
-            updateTable(searchResult, searchResultTable);
-        });
-
-        searchStringTextField.addActionListener(eventListener);
-        searchButton.addActionListener(eventListener);
-
-        JPanel upperPanel = new JPanel();
-        upperPanel.add(searchStringTextField);
-        upperPanel.add(searchButton);
+        JPanel upperPanel = buildJPanel(searchHelper, searchResultTable);
 
         Container container = getContentPane();
         container.setLayout(new BorderLayout());
@@ -56,12 +42,35 @@ public class MainFrame extends JFrame {
         setResizable(false);
     }
 
+    private JPanel buildJPanel(SearchHelper searchHelper, JTable searchResultTable) {
+        JTextField searchStringTextField = new JTextField(SEARCH_FIELD_COLUMNS_COUNT);
+        JButton searchButton = new JButton(SEARCH_BUTTON_LABEL);
+
+        var eventListener = buildEventListener(searchHelper, searchResultTable, searchStringTextField);
+        searchStringTextField.addActionListener(eventListener);
+        searchButton.addActionListener(eventListener);
+
+        JPanel upperPanel = new JPanel();
+        upperPanel.add(searchStringTextField);
+        upperPanel.add(searchButton);
+        return upperPanel;
+    }
+
+    private SearchEventListener buildEventListener(
+            SearchHelper searchHelper, JTable searchResultTable, JTextField searchStringTextField) {
+        return new SearchEventListener(() -> {
+            var searchString = searchStringTextField.getText();
+            var searchResult = searchHelper.search(searchString, RESULTS_PER_PAGE);
+            updateTable(searchResult, searchResultTable);
+        });
+    }
+
     private void updateTable(SearchResult searchResult, JTable searchResultTable) {
         DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
         tableModel.setRowCount(0);
 
         Vector<Vector> rows = new Vector<>();
-        for (SearchResultItem searchResultItem : searchResult.getSearchResultItems()) {
+        for (var searchResultItem : searchResult.getSearchResultItems()) {
             Vector<String> row = new Vector<>();
             row.add(searchResultItem.getUrl());
             rows.add(row);
