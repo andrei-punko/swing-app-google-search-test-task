@@ -1,16 +1,13 @@
 package by.andd3dfx.searchapp.search.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
+@Getter
+@RequiredArgsConstructor
 public class SearchResult {
 
-    private List<SearchResultItem> searchResultItems;
-
-    public SearchResult(List<SearchResultItem> searchResultItems) {
-        this.searchResultItems = searchResultItems;
-    }
-
-    public List<SearchResultItem> getSearchResultItems() {
-        return searchResultItems;
-    }
+    private final List<SearchResultItem> searchResultItems;
 }
