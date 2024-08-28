@@ -1,24 +1,22 @@
 package by.andd3dfx.searchapp.search;
 
 import by.andd3dfx.searchapp.search.model.SearchResultItem;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+@Slf4j
 public class SearchHelper {
 
     private final String SEARCH_URL = "https://www.google.com/search?q=%s&start=%d";
     private final String CHARSET = "UTF-8";
     private final String USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0";
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchHelper.class);
 
     /**
      * For search implementation next link was useful:
@@ -42,7 +40,7 @@ public class SearchHelper {
                     .limit(maxResults)
                     .toList();
         } catch (Exception e) {
-            LOGGER.error("Error during search occurs", e);
+            log.error("Error during search occurs", e);
             return List.of();
         }
     }
